@@ -6,6 +6,8 @@ var vertices = [];  // list of vertices
 var colors = [];
 var shapeType = "line";
 var currShapeType;
+var currVertices;
+var currColors;
 
 var inputX = document.getElementById("x-input");
 var inputY = document.getElementById("y-input");
@@ -49,12 +51,12 @@ createButton.addEventListener('click', function() {
                 break;
     
             case "square":
-                draw(vertices, shiftcolor(createcolormatrix(4), colors[0], colors[1], colors[2]), gl.TRIANGLE_FAN);
+                draw(vertices, shiftcolor(createcolormatrix(4), colors[0], colors[1], colors[2]), gl.TRIANGLE_STRIP);
                 break;
 
             case "hexagon":
                 console.log(inputR.value);
-                draw(createHexagonVertex(parseFloat(inputR.value)), shiftcolor(createcolormatrix(8), colors[0], colors[1], colors[2]), gl.TRIANGLE_FAN);
+                draw(createHexagonVertex(parseFloat(inputR.value)), shiftcolor(createcolormatrix(8), colors[0], colors[1], colors[2]), gl.TRIANGLE_STRIP);
                 // draw(createHexagonVertex(0.5),createcolormatrix(8),gl.TRIANGLE_FAN);
                 break;
             
@@ -62,6 +64,11 @@ createButton.addEventListener('click', function() {
                 break;
         }
         currShapeType = shapeType;
+        currVertices = vertices;
+        currColors = colors;
+        vertices = [];
+        colors = [];
+        document.getElementById("vertices").innerText = vertices;
     }
 })
 
@@ -77,6 +84,12 @@ inputY.addEventListener("input", function() {
 })
 
 /* Color input */
+function getColors() {
+    r = getColorsRed();
+    g = getColorsGreen();
+    b = getColorsBlue();
+}
+
 function getColorsRed() {
     var colorInput = document.getElementById("color");
     var colorValue = colorInput.value;
@@ -99,9 +112,6 @@ function getColorsGreen() {
 
     return g;
 }
-
-
-
 
 /* Shape input */
 var shapeInput = document.getElementById("shape-type");
@@ -128,20 +138,90 @@ shapeInput.addEventListener("change", function() {
 /* Stretch and scale */
 var stretch = document.getElementById("stretch");
 stretch.addEventListener("change", function() {
-    vertices = scale(vertices, stretch.value);
+    currVertices = scale(currVertices, stretch.value);
     switch (currShapeType) {
         case "line":
-            draw(vertices, shiftcolor(createcolormatrix(2), colors[0], colors[1], colors[2]), gl.LINES);
+            draw(currVertices, shiftcolor(createcolormatrix(2), currColors[0], currColors[1], currColors[2]), gl.LINES);
             break;
         case "triangle":
-            draw(vertices, shiftcolor(createcolormatrix(3), colors[0], colors[1], colors[2]), gl.TRIANGLE_FAN);
+            draw(currVertices, shiftcolor(createcolormatrix(3), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
             break;
         case "square":
-            draw(vertices, shiftcolor(createcolormatrix(4), colors[0], colors[1], colors[2]), gl.TRIANGLE_FAN);
+            draw(currVertices, shiftcolor(createcolormatrix(4), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_STRIP);
             break;
         case "hexagon":
             console.log(inputR.value);
-            draw(createHexagonVertex(parseFloat(inputR.value)), shiftcolor(createcolormatrix(8), colors[0], colors[1], colors[2]), gl.TRIANGLE_FAN);
+            draw(createHexagonVertex(parseFloat(inputR.value)), shiftcolor(createcolormatrix(8), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
+            break;
+        default:
+            break;
+    }
+})
+
+/* Move */
+var moveX = document.getElementById("move-x");
+moveX.addEventListener("change", function() {
+    var x_delta = parseFloat(moveX.value);
+    console.log(translate(currVertices, x_delta, 0));
+    switch (currShapeType) {
+        case "line":
+            draw(currVertices, shiftcolor(createcolormatrix(2), currColors[0], currColors[1], currColors[2]), gl.LINES);
+            break;
+        case "triangle":
+            draw(currVertices, shiftcolor(createcolormatrix(3), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
+            break;
+        case "square":
+            draw(currVertices, shiftcolor(createcolormatrix(4), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_STRIP);
+            break;
+        case "hexagon":
+            console.log(inputR.value);
+            draw(createHexagonVertex(parseFloat(inputR.value)), shiftcolor(createcolormatrix(8), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
+            break;
+        default:
+            break;
+    }
+});
+
+var moveY = document.getElementById("move-y");
+moveY.addEventListener("change", function() {
+    var y_delta = parseFloat(moveY.value);
+    console.log(translate(currVertices, 0, y_delta));
+    switch (currShapeType) {
+        case "line":
+            draw(currVertices, shiftcolor(createcolormatrix(2), currColors[0], currColors[1], currColors[2]), gl.LINES);
+            break;
+        case "triangle":
+            draw(currVertices, shiftcolor(createcolormatrix(3), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
+            break;
+        case "square":
+            draw(currVertices, shiftcolor(createcolormatrix(4), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_STRIP);
+            break;
+        case "hexagon":
+            console.log(inputR.value);
+            draw(createHexagonVertex(parseFloat(inputR.value)), shiftcolor(createcolormatrix(8), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
+            break;
+        default:
+            break;
+    }
+});
+
+/* Change color */
+var changeColor = document.getElementById("change-color");
+changeColor.addEventListener("click", function() {
+    currColors = shiftcolor(currColors, getColorsRed(), getColorsGreen(), getColorsBlue());
+    switch (currShapeType) {
+        case "line":
+            draw(currVertices, shiftcolor(createcolormatrix(2), currColors[0], currColors[1], currColors[2]), gl.LINES);
+            break;
+        case "triangle":
+            draw(currVertices, shiftcolor(createcolormatrix(3), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
+            break;
+        case "square":
+            draw(currVertices, shiftcolor(createcolormatrix(4), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_STRIP);
+            break;
+        case "hexagon":
+            console.log(inputR.value);
+            draw(createHexagonVertex(parseFloat(inputR.value)), shiftcolor(createcolormatrix(8), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
             break;
         default:
             break;
