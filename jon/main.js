@@ -211,3 +211,6 @@ function saveCanvasAsJson(){
         alert("Failed to load. Try again");
     }
   }
+
+colorsa = [0.5, 0.5, 0.5];
+// draw(createHexagonVertex(parseFloat(0.5)), shiftcolor(createcolormatrix(8), colorsa[0], colorsa[1], colorsa[2]), gl.TRIANGLE_FAN);
