@@ -80,13 +80,31 @@ inputY.addEventListener("input", function() {
 })
 
 /* Color input */
-function getColors() {
+function getColorsRed() {
     var colorInput = document.getElementById("color");
     var colorValue = colorInput.value;
     r = parseInt(colorValue.substr(1,2), 16) / 255;
-    g = parseInt(colorValue.substr(3,2), 16) / 255;
-    b = parseInt(colorValue.substr(5,2), 16) / 255;
+    return r;
 }
+
+function getColorsBlue() {
+    var colorInput = document.getElementById("color");
+    var colorValue = colorInput.value;
+    b = parseInt(colorValue.substr(5,2), 16) / 255;
+
+    return b;
+}
+
+function getColorsGreen() {
+    var colorInput = document.getElementById("color");
+    var colorValue = colorInput.value;
+    g = parseInt(colorValue.substr(3,2), 16) / 255;
+
+    return g;
+}
+
+
+
 
 /* Shape input */
 var shapeInput = document.getElementById("shape-type");
