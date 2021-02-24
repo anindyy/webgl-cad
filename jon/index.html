@@ -18,22 +18,21 @@
             <option value="square">Square</option>
             <option value="hexagon">Hexagon</option>
         </select> 
-        <button type="button" id="create-shape">Create shape</button><br>
-        x <input type="number" id="x-input" max="1" min="-1" value=0 step="0.01">
-        y <input type="number" id="y-input" max="1" min="-1" value=0 step="0.01">
+        <br>
         <input type="color" name="color" id="color">
-        <!-- <button type="button" id="change-color" onclick="shiftcolor(colors,getColorsRed,getColorsGreen,getColorsBlue)">Change Color</button> <br> -->
+        <button type="button" id="change-color" onclick="shiftcolor(currColors,getColorsRed,getColorsGreen,getColorsBlue)">Change Color</button> <br>
+        x <input type="number" id="x-input" max="1" min="-1" value=0 step="0.01">
+        y <input type="number" id="y-input" max="1" min="-1" value=0 step="0.01"> <br>
         <button type="button" id="add-vertex">Add vertex</button> <br>
         Vertices: <span id="vertices"></span> <br>
-        Hexagon radius <input type="number" id="r-input" value=0 step="0.01">
+        Hexagon radius <input type="number" id="r-input" value=0 step="0.01"><br>
+        <button type="button" id="create-shape">Create shape</button>
     </form>
 
     <form>
-        <!-- <b>Change Position</b>
+        <b>Change Position</b>
         Move x <input id="move-x" type="range" max="1" min="-1" step="0.01">
         Move y <input id="move-y" type="range" max="1" min="-1" step="0.01"> <br>
-        
-        <b>Change color</b> <br> -->
 
         <b>Scale by</b>
         <input id="stretch" type="number" value=1 step = "0.01"> <br>
