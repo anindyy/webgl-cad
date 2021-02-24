@@ -19,7 +19,7 @@ addButton.addEventListener("click", function(e) {
     vertices.push(parseFloat(inputY.value));
     
     // push colors
-    getColors();
+    // getColors();
     colors.push(r);
     colors.push(g);
     colors.push(b);
@@ -49,7 +49,7 @@ createButton.addEventListener('click', function() {
                 break;
     
             case "square":
-                draw(vertices, shiftcolor(createcolormatrix(4), colors[0], colors[1], colors[2]), gl.TRIANGLE_FAN);
+                draw(vertices, shiftcolor(createcolormatrix(4), colors[0], colors[1], colors[2]), gl.TRIANGLE_STRIP);
                 break;
 
             case "hexagon":
