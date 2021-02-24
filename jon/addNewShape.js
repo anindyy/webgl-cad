@@ -5,6 +5,7 @@ var nVertices = 1; // what shape are we creating
 var vertices = [];  // list of vertices
 var colors = [];
 var shapeType = "line";
+var currShapeType;
 
 var inputX = document.getElementById("x-input");
 var inputY = document.getElementById("y-input");
@@ -60,11 +61,7 @@ createButton.addEventListener('click', function() {
             default:
                 break;
         }
-         
-        // reset array
-        vertices = [];
-        colors = [];
-        document.getElementById("vertices").innerText = vertices;
+        currShapeType = shapeType;
     }
 })
 
@@ -104,6 +101,29 @@ shapeInput.addEventListener("change", function() {
             break;
         case "hexagon":
             nVertices = 1;
+            break;
+        default:
+            break;
+    }
+})
+
+/* Stretch and scale */
+var stretch = document.getElementById("stretch");
+stretch.addEventListener("change", function() {
+    vertices = scale(vertices, stretch.value);
+    switch (currShapeType) {
+        case "line":
+            draw(vertices, shiftcolor(createcolormatrix(2), colors[0], colors[1], colors[2]), gl.LINES);
+            break;
+        case "triangle":
+            draw(vertices, shiftcolor(createcolormatrix(3), colors[0], colors[1], colors[2]), gl.TRIANGLE_FAN);
+            break;
+        case "square":
+            draw(vertices, shiftcolor(createcolormatrix(4), colors[0], colors[1], colors[2]), gl.TRIANGLE_FAN);
+            break;
+        case "hexagon":
+            console.log(inputR.value);
+            draw(createHexagonVertex(parseFloat(inputR.value)), shiftcolor(createcolormatrix(8), colors[0], colors[1], colors[2]), gl.TRIANGLE_FAN);
             break;
         default:
             break;
