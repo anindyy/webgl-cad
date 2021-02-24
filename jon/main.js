@@ -42,9 +42,6 @@ const lineColor = [
 
 // menerima nilai vertex dan nilai warna untuk merender menjadi sebuah bentuk
 function draw(vertexData, colorData, mode){
-    // fungsi ini bikin ngehang
-    // convertToClipspace(vertexData);
-
     if (!gl) {
         throw new Error('WebGL not supported');
     }
@@ -173,15 +170,6 @@ draw(createHexagonVertex(0.5),createcolormatrix(8),gl.TRIANGLE_FAN);
 // draw(triangleVertex, triangleColor, gl.TRIANGLE_FAN);
 // draw(squareVertex, squareColor, gl.TRIANGLE_STRIP);
 // draw(lineVertex, lineColor, gl.LINES);
-
-// ref: https://stackoverflow.com/a/42315942
-function convertToClipspace(vertexData) {
-    for (var i = 0; i < vertexData.length; i+2) {
-        vertexData[i  ] = vertexData[i  ] / gl.canvas.width  *  2 - 1;
-        vertexData[i+1] = vertexData[i+1] / gl.canvas.height * -2 + 1;
-    }
-}
-
 // draw(translate(squareVertex, 0.3, 0.3), squareColor, gl.TRIANGLE_STRIP);
 // draw(scale(squareVertex, 1.5), squareColor, gl.TRIANGLE_STRIP);
 color_x = createcolormatrix(4);

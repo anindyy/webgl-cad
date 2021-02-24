@@ -24,7 +24,6 @@ addButton.addEventListener("click", function(e) {
 
     // show to user
     document.getElementById("vertices").innerText = vertices;
-    document.getElementById("colors").innerText = colors;
 }, false)
 
 /* Create shape */
@@ -49,6 +48,10 @@ createButton.addEventListener('click', function() {
             case "square":
                 draw(vertices, colors, gl.TRIANGLE_STRIP);
                 break;
+
+            case "hexagon":
+                draw(createHexagonVertex(document.getElementById("r-input").value), colors, gl.TRIANGLE_FAN);
+                break;
             
             default:
                 break;
@@ -58,7 +61,6 @@ createButton.addEventListener('click', function() {
         vertices = [];
         colors = [];
         document.getElementById("vertices").innerText = vertices;
-        document.getElementById("colors").innerText = colors;
     }
 })
 
@@ -95,6 +97,9 @@ shapeInput.addEventListener("change", function() {
             break;
         case "square":
             nVertices = 4;
+            break;
+        case "hexagon":
+            nVertices = 8;
             break;
         default:
             break;
