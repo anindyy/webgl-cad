@@ -141,3 +141,30 @@ color_x = createcolormatrix(4);
 shiftcolor(color_x, 0.3, 0.3, 0);
 
 draw(squareVertex, color_x, gl.TRIANGLE_STRIP);
+
+function saveCanvasAsJson(){
+    var convertToString = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(all));
+    var saveCanvas = document.createElement('a');
+    saveCanvas.setAttribute("href",     convertToString);
+    saveCanvas.setAttribute("download", "canvass.json");
+    document.body.appendChild(saveCanvas);
+    saveCanvas.click();
+    saveCanvas.remove();
+  }
+
+  function uploadFile(event) {
+      
+    var target_file = event.target.files[0];
+  
+    if (target_file) {
+        var read_file = new FileReader();
+        read_file.onload = function (e) {
+            var shapes = e.target.result;
+            all = JSON.parse(shapes);
+            renderAll();
+        }
+        read_file.readAsText(target_file);
+    } else {
+        alert("Failed to load. Try again");
+    }
+  }
