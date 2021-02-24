@@ -1,8 +1,8 @@
 const canvas = document.querySelector('canvas');
 const gl = canvas.getContext('webgl');
 
-// gl.clearColor(0.7, 0.7, 0.7, 1.0);
-// gl.clear(gl.COLOR_BUFFER_BIT);
+gl.clearColor(0.7, 0.7, 0.7, 1.0);
+gl.clear(gl.COLOR_BUFFER_BIT);
 
 const triangleVertex = [
     0, 1,
@@ -45,6 +45,9 @@ function draw(vertexData, colorData, mode){
     if (!gl) {
         throw new Error('WebGL not supported');
     }
+
+    gl.clearColor(0.7, 0.7, 0.7, 1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
 
     // buat buffer
     const positionBuffer = gl.createBuffer();
