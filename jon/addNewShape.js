@@ -55,7 +55,7 @@ createButton.addEventListener('click', function() {
 
             case "hexagon":
                 console.log(inputR.value);
-                draw(createHexagonVertex(parseFloat(inputR.value)), shiftcolor(createcolormatrix(8), colors[0], colors[1], colors[2]), gl.TRIANGLE_STRIP);
+                draw(createHexagonVertex(parseFloat(inputR.value)), shiftcolor(createcolormatrix(8), colors[0], colors[1], colors[2]), gl.TRIANGLE_FAN);
                 // draw(createHexagonVertex(0.5),createcolormatrix(8),gl.TRIANGLE_FAN);
                 break;
             
@@ -140,7 +140,7 @@ stretch.addEventListener("change", function() {
             draw(currVertices, shiftcolor(createcolormatrix(3), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
             break;
         case "square":
-            draw(currVertices, shiftcolor(createcolormatrix(4), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_STRIP);
+            draw(currVertices, shiftcolor(createcolormatrix(4), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
             break;
         case "hexagon":
             console.log(inputR.value);
@@ -164,7 +164,7 @@ moveX.addEventListener("change", function() {
             draw(currVertices, shiftcolor(createcolormatrix(3), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
             break;
         case "square":
-            draw(currVertices, shiftcolor(createcolormatrix(4), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_STRIP);
+            draw(currVertices, shiftcolor(createcolormatrix(4), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
             break;
         case "hexagon":
             console.log(inputR.value);
@@ -187,7 +187,7 @@ moveY.addEventListener("change", function() {
             draw(currVertices, shiftcolor(createcolormatrix(3), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
             break;
         case "square":
-            draw(currVertices, shiftcolor(createcolormatrix(4), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_STRIP);
+            draw(currVertices, shiftcolor(createcolormatrix(4), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
             break;
         case "hexagon":
             console.log(inputR.value);
@@ -210,7 +210,7 @@ changeColor.addEventListener("click", function() {
             draw(currVertices, shiftcolor(createcolormatrix(3), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
             break;
         case "square":
-            draw(currVertices, shiftcolor(createcolormatrix(4), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_STRIP);
+            draw(currVertices, shiftcolor(createcolormatrix(4), currColors[0], currColors[1], currColors[2]), gl.TRIANGLE_FAN);
             break;
         case "hexagon":
             console.log(inputR.value);
