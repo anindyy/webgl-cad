@@ -62,11 +62,9 @@ function draw(vertexData, colorData, mode){
     const vertex_shader = gl.createShader(gl.VERTEX_SHADER);
     gl.shaderSource(vertex_shader, `
     precision mediump float;
-
     attribute vec2 position;
     attribute vec3 color;
     varying vec3 vColor;
-
     void main() {
         vColor = color;
         gl_Position = vec4(position, 0, 1);
@@ -78,9 +76,7 @@ function draw(vertexData, colorData, mode){
     const fragment_shader = gl.createShader(gl.FRAGMENT_SHADER);
     gl.shaderSource(fragment_shader, `
     precision mediump float;
-
     varying vec3 vColor;
-
     void main() {
         gl_FragColor = vec4(vColor, 1);
     }
@@ -217,3 +213,7 @@ function saveCanvasAsJson(){
 
 colorsa = [0.5, 0.5, 0.5];
 // draw(createHexagonVertex(parseFloat(0.5)), shiftcolor(createcolormatrix(8), colorsa[0], colorsa[1], colorsa[2]), gl.TRIANGLE_FAN);
+
+function alertHelp() {
+    alert("Welcome to the drawing app! Pilih shape yang ingin kamu buat terlebih dahulu. Kemudian terdapat juga fitur mengganti warna pada gambar yang telah dibentuk.Scale by bisa digunakan untuk memperbesar atau memperkecil objek. Kemudian untuk shape yang dibentuk yaitu hexagon, maka pengaturannya ke menu hexagon radius. Dan juga bisa menambah vertex melalui menu add vertices, dan mengatur x dan y ke nilai yang diinginkan.Terakhir, Anda dapat mengubah posisi dari objek melalui menu change position");
+}

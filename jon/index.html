@@ -22,7 +22,7 @@
         <input type="color" name="color" id="color">
         <button type="button" id="change-color" onclick="shiftcolor(currColors,getColorsRed,getColorsGreen,getColorsBlue)">Change Color</button> <br>
         x <input type="number" id="x-input" max="1" min="-1" value=0 step="0.01">
-        y <input type="number" id="y-input" max="1" min="-1" value=0 step="0.01"> 
+        y <input type="number" id="y-input" max="1" min="-1" value=0 step="0.01"> <br>
         <button type="button" id="add-vertex">Add vertex</button> <br>
         Vertices: <span id="vertices"></span> <br>
         Hexagon radius <input type="number" id="r-input" value=0 step="0.01"><br>
@@ -37,6 +37,9 @@
         <b>Scale by</b>
         <input id="stretch" type="number" value=1 step = "0.01"> <br>
     </form>
+    <div class = "help" style = 'position: absolute; left: 400px; top: 650px'>
+        <button type="button" id="help" onclick="alertHelp()">Help</button>
+    </div>
 </body>
 
 <script src="main.js" defer></script>
