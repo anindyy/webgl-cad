@@ -5,12 +5,9 @@ var nVertices = 1; // what shape are we creating
 var vertices = [];  // list of vertices
 var colors = [];
 var shapeType = "line";
-<<<<<<< HEAD
 var currShapeType;
 var currVertices;
 var currColors;
-=======
->>>>>>> 279ae75ab8880aabc3c80704ef45ef6089f2753c
 
 var inputX = document.getElementById("x-input");
 var inputY = document.getElementById("y-input");
@@ -65,14 +62,9 @@ createButton.addEventListener('click', function() {
             default:
                 break;
         }
-<<<<<<< HEAD
         currShapeType = shapeType;
         currVertices = vertices;
         currColors = colors;
-=======
-         
-        // reset array
->>>>>>> 279ae75ab8880aabc3c80704ef45ef6089f2753c
         vertices = [];
         colors = [];
         document.getElementById("vertices").innerText = vertices;
