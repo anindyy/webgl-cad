@@ -14,16 +14,16 @@ const triangleColor = [
 ];
 
 const squareVertex = [
-    1, 1,
-    1, -1,
-    -1, 1,
-    -1, -1,
+    0.1, 0.3,
+    0.1, -0.3,
+    -0.3, 0.3,
+    -0.3, -0.3,
 ]
 
 const squareColor = [
     1, 0, 0,
     1, 0, 0,
-    0, 1, 0,
+    0, 0, 0,
     0, 1, 0,
 ]
 
@@ -100,6 +100,44 @@ function draw(vertexData, colorData, mode){
     gl.drawArrays(mode, 0, vertexData.length/2);
 }
 
+function translate(array, x_delta, y_delta){
+    for (let i = 0; i < array.length; i=i+2) {
+        array[i] = array[i] + x_delta;
+        array[i+1] = array[i+1] + y_delta;
+    }
+    return array;
+}
+
+function scale(array, s){
+    for (let i = 0; i < array.length; i++) {
+        array[i] = s*array[i];
+    }
+    return array;
+}
+
+function createcolormatrix(n_vertices){
+    return new Array(n_vertices*3).fill(0);
+}
+
+function shiftcolor(colorArray, r_delta, g_delta, b_delta){
+    for(let i = 0; i < colorArray.length; i=i+3){
+        colorArray[i] = colorArray[i] + r_delta;
+        colorArray[i+1] = colorArray[i+1] + g_delta;
+        colorArray[i+2] = colorArray[i+2] + b_delta;
+    }
+
+    return colorArray;
+}
+
 // draw(triangleVertex, triangleColor, gl.TRIANGLE_FAN);
 // draw(squareVertex, squareColor, gl.TRIANGLE_STRIP);
-draw(lineVertex, lineColor, gl.LINES);
+// draw(lineVertex, lineColor, gl.LINES);
+
+
+// draw(translate(squareVertex, 0.3, 0.3), squareColor, gl.TRIANGLE_STRIP);
+
+// draw(scale(squareVertex, 1.5), squareColor, gl.TRIANGLE_STRIP);
+color_x = createcolormatrix(4);
+shiftcolor(color_x, 0.3, 0.3, 0);
+
+draw(squareVertex, color_x, gl.TRIANGLE_STRIP);
