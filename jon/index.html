@@ -22,6 +22,7 @@
         x <input type="number" id="x-input" max="1" min="-1" value=0 step="0.01">
         y <input type="number" id="y-input" max="1" min="-1" value=0 step="0.01">
         <input type="color" name="color" id="color">
+        <button type="button" id="change-color" onclick="shiftcolor(colors,getColorsRed,getColorsGreen,getColorsBlue)">Change Color</button> <br>
         <button type="button" id="add-vertex">Add vertex</button> <br>
         Vertices: <span id="vertices"></span> <br>
         Colors: <span id="colors"></span> <br>
@@ -31,4 +32,3 @@
 
 <script src="main.js" defer></script>
 <script src="addNewShape.js"></script>
-</html>
