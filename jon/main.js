@@ -14,16 +14,16 @@ const triangleColor = [
 ];
 
 const squareVertex = [
-    1, 1,
-    1, -1,
-    -1, 1,
-    -1, -1,
+    0.1, 0.3,
+    0.1, -0.3,
+    -0.3, 0.3,
+    -0.3, -0.3,
 ]
 
 const squareColor = [
     1, 0, 0,
     1, 0, 0,
-    0, 1, 0,
+    0, 0, 0,
     0, 1, 0,
 ]
 
@@ -102,6 +102,35 @@ function draw(vertexData, colorData, mode){
     gl.drawArrays(mode, 0, vertexData.length/2);
 }
 
+function translate(array, x_delta, y_delta){
+    for (let i = 0; i < array.length; i=i+2) {
+        array[i] = array[i] + x_delta;
+        array[i+1] = array[i+1] + y_delta;
+    }
+    return array;
+}
+
+function scale(array, s){
+    for (let i = 0; i < array.length; i++) {
+        array[i] = s*array[i];
+    }
+    return array;
+}
+
+function createcolormatrix(n_vertices){
+    return new Array(n_vertices*3).fill(0);
+}
+
+function shiftcolor(colorArray, r_delta, g_delta, b_delta){
+    for(let i = 0; i < colorArray.length; i=i+3){
+        colorArray[i] = colorArray[i] + r_delta;
+        colorArray[i+1] = colorArray[i+1] + g_delta;
+        colorArray[i+2] = colorArray[i+2] + b_delta;
+    }
+
+    return colorArray;
+}
+
 // draw(triangleVertex, triangleColor, gl.TRIANGLE_FAN);
 // draw(squareVertex, squareColor, gl.TRIANGLE_STRIP);
 // draw(lineVertex, lineColor, gl.LINES);
@@ -113,3 +142,37 @@ function convertToClipspace(vertexData) {
         vertexData[i+1] = vertexData[i+1] / gl.canvas.height * -2 + 1;
     }
 }
+
+// draw(translate(squareVertex, 0.3, 0.3), squareColor, gl.TRIANGLE_STRIP);
+// draw(scale(squareVertex, 1.5), squareColor, gl.TRIANGLE_STRIP);
+color_x = createcolormatrix(4);
+shiftcolor(color_x, 0.3, 0.3, 0);
+
+draw(squareVertex, color_x, gl.TRIANGLE_STRIP);
+
+function saveCanvasAsJson(){
+    var convertToString = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(all));
+    var saveCanvas = document.createElement('a');
+    saveCanvas.setAttribute("href",     convertToString);
+    saveCanvas.setAttribute("download", "canvass.json");
+    document.body.appendChild(saveCanvas);
+    saveCanvas.click();
+    saveCanvas.remove();
+  }
+
+  function uploadFile(event) {
+      
+    var target_file = event.target.files[0];
+  
+    if (target_file) {
+        var read_file = new FileReader();
+        read_file.onload = function (e) {
+            var shapes = e.target.result;
+            all = JSON.parse(shapes);
+            renderAll();
+        }
+        read_file.readAsText(target_file);
+    } else {
+        alert("Failed to load. Try again");
+    }
+  }
