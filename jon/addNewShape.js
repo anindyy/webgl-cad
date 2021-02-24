@@ -3,94 +3,90 @@ var r, g, b;   // colors
 var creating = false;  // create mode
 var nVertices = 2; // what shape are we creating
 var vertices = [];  // list of vertices
+var colors = [];
 var shapeType = "line";
 
-/* Changing create mode */
-var createButton = document.getElementById("create-shape");
-createButton.addEventListener("click", function(e) {
-    if (creating) {
-        creating = false;
-        createButton.innerText = "Create";
-    } else {
-        creating = true;
-        createButton.innerText = "Stop creating";
-    }
+var inputX = document.getElementById("x-input");
+var inputY = document.getElementById("y-input");
+
+/* Add vertex */
+var addButton = document.getElementById("add-vertex");
+addButton.addEventListener("click", function(e) {
+    // push vertices
+    vertices.push(parseInt(inputX.value));
+    vertices.push(parseInt(inputY.value));
+    
+    // push colors
+    getColors();
+    colors.push(r);
+    colors.push(g);
+    colors.push(b);
+
+    // show to user
+    document.getElementById("vertices").innerText = vertices;
+    document.getElementById("colors").innerText = colors;
 }, false)
 
-/* Position input */
-const c = document.querySelector('canvas')
-c.addEventListener('mousedown', function(e) {
+/* Create shape */
+var createButton = document.getElementById('create-shape')
+createButton.addEventListener('click', function() {
+    console.log(vertices);
+    console.log(colors);
     // if we are creating and we have enough vertices, create the shape
-    if (creating) {
-        var pos = getRelativeMousePosition(canvas, e);
-        vertices.push(pos.x);
-        vertices.push(pos.y);
-        console.log(vertices);
+    if (vertices.length >= nVertices*2) {
+        vertices.slice(0, nVertices*2 + 1);
+        colors.slice(0, nVertices*3 + 1);
 
-        if (vertices.length >= nVertices*2) {
-            vertices.slice(0, nVertices*2 + 1);
-            switch (shapeType) {
-                case "line":
-                    color = [
-                        r, g, b, 
-                        r, g, b,
-                    ];
-                    draw(vertices, color, gl.LINES);
-                    break;
-        
-                case "triangle":
-                    color = [
-                        r, g, b, 
-                        r, g, b,
-                        r, g, b,
-                    ];
-                    draw(vertices, color, gl.TRIANGLE_FAN);
-                    break;
-        
-                case "square":
-                    color = [
-                        r, g, b, 
-                        r, g, b,
-                        r, g, b,
-                        r, g, b,
-                    ];
-                    draw(vertices, color, gl.TRIANGLE_STRIP);
-                    break;
-                
-                default:
-                    break;
-            }
-            vertices = []; // reset array
+        switch (shapeType) {
+            case "line":
+                draw(vertices, colors, gl.LINES);
+                break;
+    
+            case "triangle":
+                draw(vertices, colors, gl.TRIANGLE_FAN);
+                break;
+    
+            case "square":
+                draw(vertices, colors, gl.TRIANGLE_STRIP);
+                break;
+            
+            default:
+                break;
         }
+         
+        // reset array
+        vertices = [];
+        colors = [];
+        document.getElementById("vertices").innerText = vertices;
+        document.getElementById("colors").innerText = colors;
     }
 })
 
-function getRelativeMousePosition(canvas, event) {
-    var rect = canvas.getBoundingClientRect();
-    var x = event.clientX - rect.left;
-    var y = event.clientY - rect.top;
+/* Limit position input */
+inputX.addEventListener("input", function() {
+    if (inputX.value > 1) inputX.value = 1;
+    if (inputX.value < -1) inputX.value = -1;
+})
 
-    // get relative position to canvas
-    x = x * canvas.width / canvas.clientWidth;
-    y = y * canvas.height / canvas.clientHeight;
-
-    return { x, y }
-}
+inputY.addEventListener("input", function() {
+    if (inputY.value > 1) inputY.value = 1;
+    if (inputY.value < -1) inputY.value = -1;
+})
 
 /* Color input */
-var colorInput = document.getElementById("color");
-colorInput.addEventListener("input", function() {
+function getColors() {
+    var colorInput = document.getElementById("color");
     var colorValue = colorInput.value;
     r = parseInt(colorValue.substr(1,2), 16) / 255;
     g = parseInt(colorValue.substr(3,2), 16) / 255;
     b = parseInt(colorValue.substr(5,2), 16) / 255;
-})
+}
 
 /* Shape input */
 var shapeInput = document.getElementById("shape-type");
 shapeInput.addEventListener("change", function() {
-    shapeValue = shapeInput.value;
-    switch (shapeValue) {
+    shapeType = shapeInput.value;
+    switch (shapeType) {
         case "line":
             nVertices = 2;
             break;

@@ -16,10 +16,14 @@
             <option value="line">Line</option>
             <option value="triangle">Triangle</option>
             <option value="square">Square</option>
-        </select>
+        </select> 
+        <button type="button" id="create-shape">Create shape</button><br>
+        x <input type="number" id="x-input" max="1" min="-1" value=0>
+        y <input type="number" id="y-input" max="1" min="-1" value=0>
         <input type="color" name="color" id="color">
-        <button type="button" id="create-shape">Create</button>
-        Click in canvas where you want the vertices to be.
+        <button type="button" id="add-vertex">Add vertex</button> <br>
+        Vertices: <span id="vertices"></span> <br>
+        Colors: <span id="colors"></span>
     </form>
 </body>
 
