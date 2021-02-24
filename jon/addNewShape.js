@@ -50,7 +50,7 @@ createButton.addEventListener('click', function() {
                 break;
     
             case "square":
-                draw(vertices, shiftcolor(createcolormatrix(4), colors[0], colors[1], colors[2]), gl.TRIANGLE_STRIP);
+                draw(vertices, shiftcolor(createcolormatrix(4), colors[0], colors[1], colors[2]), gl.TRIANGLE_FAN);
                 break;
 
             case "hexagon":
