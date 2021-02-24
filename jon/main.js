@@ -1,6 +1,9 @@
 const canvas = document.querySelector('canvas');
 const gl = canvas.getContext('webgl');
 
+gl.clearColor(0.7, 0.7, 0.7, 1.0);
+gl.clear(gl.COLOR_BUFFER_BIT);
+
 const triangleVertex = [
     0, 1,
     1, -1,
@@ -131,6 +134,42 @@ function shiftcolor(colorArray, r_delta, g_delta, b_delta){
     return colorArray;
 }
 
+function createHexagonVertex(radius){
+    var x = 0; //x coordinate for the center of the hexagon
+	var y = 0; //y coordinate for the center of the hexagon
+	var q = Math.sqrt(Math.pow(radius,2) - Math.pow((radius/2),2)); //y coordinate of the points that are above and below center point
+	var xCoord = new Array(8);
+	var yCoord = new Array(8);
+	xCoord[0] = x;
+	yCoord[0] = y;
+	xCoord[1] = x + radius;
+	yCoord[1] = y;
+	xCoord[2] = x + (radius/2);
+	yCoord[2] = y+q;
+	xCoord[3] = x-(radius/2);
+	yCoord[3] = y+q;
+	xCoord[4] = x - radius;
+	yCoord[4] = y;
+	xCoord[5] = x-(radius/2);
+	yCoord[5] = y-q;
+	xCoord[6] = x + (radius/2);
+	yCoord[6] = y-q;
+	xCoord[7] = x + radius;
+	yCoord[7] = y;
+	
+	var vertices = [xCoord[0],yCoord[0]];// Initialize Array
+	
+    for ( var i = 1; i < xCoord.length; ++i ) {
+		vertices.push(xCoord[i]);
+        vertices.push(yCoord[i]);
+		console.log("Coordinate " + i + ": " + xCoord[i] + "," + yCoord[i]);
+    }
+
+    return vertices;
+}
+
+draw(createHexagonVertex(0.5),createcolormatrix(8),gl.TRIANGLE_FAN);
+
 // draw(triangleVertex, triangleColor, gl.TRIANGLE_FAN);
 // draw(squareVertex, squareColor, gl.TRIANGLE_STRIP);
 // draw(lineVertex, lineColor, gl.LINES);
@@ -148,7 +187,7 @@ function convertToClipspace(vertexData) {
 color_x = createcolormatrix(4);
 shiftcolor(color_x, 0.3, 0.3, 0);
 
-draw(squareVertex, color_x, gl.TRIANGLE_STRIP);
+// draw(squareVertex, color_x, gl.TRIANGLE_STRIP);
 
 function saveCanvasAsJson(){
     var convertToString = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(all));
