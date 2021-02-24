@@ -1,8 +1,8 @@
 const canvas = document.querySelector('canvas');
 const gl = canvas.getContext('webgl');
 
-gl.clearColor(0.7, 0.7, 0.7, 1.0);
-gl.clear(gl.COLOR_BUFFER_BIT);
+// gl.clearColor(0.7, 0.7, 0.7, 1.0);
+// gl.clear(gl.COLOR_BUFFER_BIT);
 
 const triangleVertex = [
     0, 1,
@@ -49,6 +49,7 @@ function draw(vertexData, colorData, mode){
         throw new Error('WebGL not supported');
     }
 
+    // buat buffer
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexData), gl.STATIC_DRAW);
@@ -57,6 +58,7 @@ function draw(vertexData, colorData, mode){
     gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colorData), gl.STATIC_DRAW);
 
+    // buat vertex shader
     const vertex_shader = gl.createShader(gl.VERTEX_SHADER);
     gl.shaderSource(vertex_shader, `
     precision mediump float;
@@ -72,6 +74,7 @@ function draw(vertexData, colorData, mode){
     `);
     gl.compileShader(vertex_shader);
 
+    // buat fragment shader
     const fragment_shader = gl.createShader(gl.FRAGMENT_SHADER);
     gl.shaderSource(fragment_shader, `
     precision mediump float;
@@ -85,12 +88,16 @@ function draw(vertexData, colorData, mode){
     gl.compileShader(fragment_shader);
     console.log(gl.getShaderInfoLog(fragment_shader));
 
+    // buat program
     const program = gl.createProgram();
+
+    // memasukan shader ke program
     gl.attachShader(program, vertex_shader);
     gl.attachShader(program, fragment_shader);
 
     gl.linkProgram(program);
 
+    // vertex attribute
     const positionLocation = gl.getAttribLocation(program, `position`);
     gl.enableVertexAttribArray(positionLocation);
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
@@ -101,6 +108,7 @@ function draw(vertexData, colorData, mode){
     gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
     gl.vertexAttribPointer(colorLocation, 3, gl.FLOAT, false, 0, 0);
 
+    // gambar
     gl.useProgram(program);
     gl.drawArrays(mode, 0, vertexData.length/2);
 }
@@ -168,7 +176,7 @@ function createHexagonVertex(radius){
     return vertices;
 }
 
-draw(createHexagonVertex(0.5),createcolormatrix(8),gl.TRIANGLE_FAN);
+// draw(createHexagonVertex(0.5),createcolormatrix(8),gl.TRIANGLE_FAN);
 
 // draw(triangleVertex, triangleColor, gl.TRIANGLE_FAN);
 // draw(squareVertex, squareColor, gl.TRIANGLE_STRIP);
