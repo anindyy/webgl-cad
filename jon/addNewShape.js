@@ -13,8 +13,8 @@ var inputY = document.getElementById("y-input");
 var addButton = document.getElementById("add-vertex");
 addButton.addEventListener("click", function(e) {
     // push vertices
-    vertices.push(parseInt(inputX.value));
-    vertices.push(parseInt(inputY.value));
+    vertices.push(parseFloat(inputX.value));
+    vertices.push(parseFloat(inputY.value));
     
     // push colors
     getColors();
