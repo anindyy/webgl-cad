@@ -9,8 +9,20 @@
 </head>
 
 <body>
-    <canvas id="glCanvas" width="800" height="600"></canvas>    
+    <canvas id="glCanvas" width="800" height="600"></canvas>
+    <form>
+        <b>Add new shape:</b>
+        <select name="shape-type" id="shape-type">
+            <option value="line">Line</option>
+            <option value="triangle">Triangle</option>
+            <option value="square">Square</option>
+        </select>
+        <input type="color" name="color" id="color">
+        <button type="button" id="create-shape">Create</button>
+        Click in canvas where you want the vertices to be.
+    </form>
 </body>
 
 <script src="main.js" defer></script>
+<script src="addNewShape.js"></script>
 </html>
