@@ -21,9 +21,9 @@ addButton.addEventListener("click", function(e) {
     vertices.push(parseFloat(inputY.value));
     
     // push colors
-    colors.push(getColorsRed);
-    colors.push(getColorsGreen);
-    colors.push(getColorsBlue);
+    colors.push(getColorsRed());
+    colors.push(getColorsGreen());
+    colors.push(getColorsBlue());
 
     // show to user
     document.getElementById("vertices").innerText = vertices;
@@ -83,23 +83,17 @@ inputY.addEventListener("input", function() {
 })
 
 /* Color input */
-function getColors() {
-    r = getColorsRed();
-    g = getColorsGreen();
-    b = getColorsBlue();
-}
-
 function getColorsRed() {
     var colorInput = document.getElementById("color");
     var colorValue = colorInput.value;
-    r = parseInt(colorValue.substr(1,2), 16) / 255;
+    var r = parseInt(colorValue.substr(1,2), 16) / 255;
     return r;
 }
 
 function getColorsBlue() {
     var colorInput = document.getElementById("color");
     var colorValue = colorInput.value;
-    b = parseInt(colorValue.substr(5,2), 16) / 255;
+    var b = parseInt(colorValue.substr(5,2), 16) / 255;
 
     return b;
 }
@@ -107,7 +101,7 @@ function getColorsBlue() {
 function getColorsGreen() {
     var colorInput = document.getElementById("color");
     var colorValue = colorInput.value;
-    g = parseInt(colorValue.substr(3,2), 16) / 255;
+    var g = parseInt(colorValue.substr(3,2), 16) / 255;
 
     return g;
 }
@@ -207,7 +201,7 @@ moveY.addEventListener("change", function() {
 /* Change color */
 var changeColor = document.getElementById("change-color");
 changeColor.addEventListener("click", function() {
-    currColors = shiftcolor(currColors, getColorsRed(), getColorsGreen(), getColorsBlue());
+    currColors = shiftcolor(currColors, currColors[0]-getColorsRed(), currColors[1]-getColorsGreen(), currColors[1]-getColorsBlue());
     switch (currShapeType) {
         case "line":
             draw(currVertices, shiftcolor(createcolormatrix(2), currColors[0], currColors[1], currColors[2]), gl.LINES);
