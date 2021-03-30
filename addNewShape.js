@@ -64,9 +64,7 @@ createButton.addEventListener('click', function() {
         }
         currShapeType = shapeType;
         currVertices = vertices;
-        console.log("colors", colors);
         currColors = colors;
-        console.log("curr", currColors);
         vertices = [];
         colors = [];
         document.getElementById("vertices").innerText = vertices;
