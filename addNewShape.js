@@ -204,7 +204,7 @@ moveY.addEventListener("change", function() {
 /* Change color */
 var changeColor = document.getElementById("change-color");
 changeColor.addEventListener("click", function() {
-    currColors = shiftcolor(currColors, currColors[0]-getColorsRed(), currColors[1]-getColorsGreen(), currColors[1]-getColorsBlue());
+    currColors = shiftcolor(currColors, getColorsRed(), getColorsGreen(), getColorsBlue());
     switch (currShapeType) {
         case "line":
             draw(currVertices, shiftcolor(createcolormatrix(2), currColors[0], currColors[1], currColors[2]), gl.LINES);

@@ -134,9 +134,9 @@ function createcolormatrix(n_vertices){
 
 function shiftcolor(colorArray, r_delta, g_delta, b_delta){
     for(let i = 0; i < colorArray.length; i=i+3){
-        colorArray[i] = colorArray[i] + r_delta;
-        colorArray[i+1] = colorArray[i+1] + g_delta;
-        colorArray[i+2] = colorArray[i+2] + b_delta;
+        colorArray[i] = r_delta;
+        colorArray[i+1] = g_delta;
+        colorArray[i+2] = b_delta;
     }
 
     return colorArray;
