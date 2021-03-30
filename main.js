@@ -252,3 +252,56 @@ document.getElementById('import').onclick = function() {
 
 colorsa = [0.5, 0.5, 0.5];
 // draw(createHexagonVertex(parseFloat(0.5)), shiftcolor(createcolormatrix(8), colorsa[0], colorsa[1], colorsa[2]), gl.TRIANGLE_FAN);
+
+function alertHelp() {
+    var newLine = "\r\n"
+    var msg = "Welcome to your personal drawing canvas!"
+    msg += newLine;
+    msg += newLine;
+    msg += "Untuk memulai, pilih shape yang akan digambar terlebih dahulu. Terdapat 3 pilihan yaitu:";
+    msg += newLine;
+    msg += newLine;
+    msg += "Line";
+    msg += newLine;
+    msg += "Triangle";
+    msg += newLine;
+    msg += "Square";
+    msg+= newLine;
+    msg += "Hexagon";
+    msg+= newLine;
+    msg += newLine;
+    msg += "Setelah memilih shape yang akan digambar, masukan vertex sesuai yang anda inginkan.";
+    msg += newLine;
+    msg += "Anda juga dapat mengganti warna terlebih dahulu pada tombol 'Change Color'";
+    msg += newLine;
+    msg += newLine;
+    msg += "Setelah memasukan vertex, misalkan (0,0),(0,0.4), tekan tombol 'Create Shape'";
+    msg += newLine;
+    msg += "Pada contoh diatas,canvas akan menggambar sebuah garis lurus sesuai vertex yang tadi sudah diinput";
+    msg+= newLine;
+    msg += newLine;
+    msg += "Terdapat juga fitur 'Change Position', yang dapat menggeser garis/shape yang dibuat sesuai dengan input dari slider";
+    msg+= newLine;
+    msg += "Fitur ini dapat menggeser melalui sumbu x, maupun sumbu y.";
+    msg+= newLine;
+    msg += newLine;
+    msg += "Fitur lain yang tersedia adalah scaling.Fitur ini berfungsi untuk meningkatkan ukuran dari shape/garis.";
+    msg+= newLine;
+    msg += "Misalkan, input scaling adalah 0.5, maka canvas akan menurunkan size dari object setengah dari ukuran semula.";
+    msg+= newLine;
+    msg += newLine;
+    msg += "Terakhir, ada fitur save and load yang dapat menyimpan canvas yang telah anda buat.";
+    msg+= newLine;
+    msg += "Fitur ini sangat membantu apabila anda ingin menyimpan hasil pekerjaan dan ingin melakukan load di kemudian hari";
+    msg+= newLine;
+    msg += "Caranya cukup gampang, setelah anda selesai menggambar di canvas, pencet tombol Save untuk menyimpan canvas";
+    msg+= newLine;
+    msg += "Dikemudian hari, apabila anda ingin membuka kembali, tekan tombol Choose File untuk memilih file yang ingin di Load.";
+    msg+= newLine;
+    msg += "Setelah itu, tekan tombol 'Import' untuk otomatis canvas menggambar dari file yang telah diload.";
+    msg+= newLine;
+    msg += newLine;
+    msg += "Selamat bereksperimen!";
+    msg+= newLine;
+    alert(msg);
+}
