@@ -8,6 +8,8 @@ var shapeType = "line";
 var currShapeType;
 var currVertices;
 var currColors;
+var save_vertices = [];
+
 
 var inputX = document.getElementById("x-input");
 var inputY = document.getElementById("y-input");
@@ -64,6 +66,7 @@ createButton.addEventListener('click', function() {
         }
         currShapeType = shapeType;
         currVertices = vertices;
+        new_vertices = currVertices;
         currColors = colors;
         vertices = [];
         colors = [];

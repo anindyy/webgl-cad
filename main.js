@@ -189,31 +189,66 @@ shiftcolor(color_x, 0.3, 0.3, 0);
 // draw(squareVertex, color_x, gl.TRIANGLE_STRIP);
 
 function saveCanvasAsJson(){
-    var convertToString = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(all));
+    var jsonObject = {};
+    
+    jsonObject.vertices = (new_vertices);
+    jsonObject.colors = (currColors);
+    jsonObject.shapetype = currShapeType;
+    console.log(JSON.stringify(jsonObject,null,2));
+    var stringifyObj = JSON.stringify(jsonObject,null,2)
     var saveCanvas = document.createElement('a');
-    saveCanvas.setAttribute("href",     convertToString);
+    var file = new Blob([stringifyObj], {type: "text/plain"})
+    saveCanvas.setAttribute("href",     URL.createObjectURL(file));
     saveCanvas.setAttribute("download", "canvass.json");
     document.body.appendChild(saveCanvas);
     saveCanvas.click();
     saveCanvas.remove();
   }
 
-  function uploadFile(event) {
-      
-    var target_file = event.target.files[0];
-  
-    if (target_file) {
-        var read_file = new FileReader();
-        read_file.onload = function (e) {
-            var shapes = e.target.result;
-            all = JSON.parse(shapes);
-            renderAll();
-        }
-        read_file.readAsText(target_file);
-    } else {
-        alert("Failed to load. Try again");
-    }
+document.getElementById('import').onclick = function() {
+
+    var files = document.getElementById('selectFiles').files;
+  console.log(files);
+  if (files.length <= 0) {
+    return false;
   }
+
+  var fr = new FileReader();
+
+  fr.onload = function(e) { 
+  console.log(e);
+    var result = JSON.parse(e.target.result);
+    console.log(result.shapetype)
+    var inputR = document.getElementById("r-input");
+
+    switch (result.shapetype) {
+        case "line":
+            draw(result.vertices, shiftcolor(createcolormatrix(2), result.colors[0], result.colors[1], result.colors[2]), gl.LINES);
+            break;
+
+        case "triangle":
+            draw(result.vertices, shiftcolor(createcolormatrix(3), result.colors[0], result.colors[1], result.colors[2]), gl.TRIANGLE_FAN);
+            break;
+
+        case "square":
+            draw(result.vertices, shiftcolor(createcolormatrix(4),result.colors[0], result.colors[1], result.colors[2]), gl.TRIANGLE_FAN);
+            break;
+
+        case "hexagon":
+            console.log(inputR.value);
+            draw(createHexagonVertex(parseFloat(inputR.value)), shiftcolor(createcolormatrix(8), result.colors[0], result.colors[1], result.colors[2]), gl.TRIANGLE_FAN);
+            // draw(createHexagonVertex(0.5),createcolormatrix(8),gl.TRIANGLE_FAN);
+            break;
+        
+        default:
+            break;
+    }
+    var formatted = JSON.stringify(result, null, 2);
+        document.getElementById('result').value = formatted;
+  }
+
+  fr.readAsText(files.item(0));
+};
 
 colorsa = [0.5, 0.5, 0.5];
 // draw(createHexagonVertex(parseFloat(0.5)), shiftcolor(createcolormatrix(8), colorsa[0], colorsa[1], colorsa[2]), gl.TRIANGLE_FAN);
